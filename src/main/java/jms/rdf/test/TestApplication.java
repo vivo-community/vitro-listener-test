@@ -3,6 +3,8 @@ package jms.rdf.test;
 import javax.jms.JMSException;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 public class TestApplication {
+
+	private final static Logger logger = LoggerFactory.getLogger(TestApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(TestApplication.class, args);
@@ -59,7 +63,7 @@ public class TestApplication {
 	public class Listener {
 		@JmsListener(destination = "rdf-delta-patch", containerFactory = "jmsListenerContainerFactory")
 		public void receiveMessage(final Message<String> message) throws JMSException {
-			System.out.println(message.getPayload());
+			logger.info(message.getPayload());
 		}
 	}
 
