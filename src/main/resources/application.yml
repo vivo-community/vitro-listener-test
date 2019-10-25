@@ -1,3 +1,21 @@
+logging:
+  file:
+    name: vitro-listener-test.log
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: logfile
+  endpoint:
+    logfile:
+      enabled: true
+  security:
+    enabled: false
+
+server:
+  port: 9000
+
 spring:
   activemq:
     broker-url: tcp://localhost:61616
